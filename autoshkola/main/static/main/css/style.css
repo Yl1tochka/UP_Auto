@@ -48,9 +48,9 @@
 
     /* ——— Текст ——— */
     --text-primary: #ffffff;
-    --text-secondary: rgba(255, 255, 255, 0.55);
-    --text-muted: rgba(255, 255, 255, 0.28);
-    --text-ghost: rgba(255, 255, 255, 0.15);
+    --text-secondary: rgba(255, 255, 255, 0.95);
+    --text-muted: rgba(255, 255, 255, 0.90);
+    --text-ghost: rgba(255, 255, 255, 0.80);
 
     /* ——— Границы ——— */
     --border: rgba(255, 255, 255, 0.06);
