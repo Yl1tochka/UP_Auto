@@ -76,3 +76,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+gosposhlina_link = 'https://almetpt.ru/files/driving/gosposhlina.pdf'
