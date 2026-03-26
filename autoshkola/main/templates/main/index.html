@@ -1,0 +1,55 @@
+{% extends 'main/base.html' %}
+{% block title %}Автошкола «Авто-политех» — Главная{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<div class="glass-card hero">
+    <h2>АВТО-ПОЛИТЕХ</h2>
+    <p class="subtitle">✦ Добро пожаловать ✦</p>
+    <p class="welcome-text">Мы рады приветствовать Вас на нашей странице!</p>
+</div>
+
+<!-- Контакты -->
+<div class="info-grid">
+    <div class="info-item">
+        <span class="info-icon">📞</span>
+        <h3>Телефон</h3>
+        <p>{{ settings.phone }}</p>
+    </div>
+    <div class="info-item">
+        <span class="info-icon">🏢</span>
+        <h3>Кабинет записи</h3>
+        <p>{{ settings.office_room }}<br><small>с собой необходимо принести паспорт</small></p>
+    </div>
+    <div class="info-item">
+        <span class="info-icon">🕐</span>
+        <h3>Режим работы</h3>
+        <p>{{ settings.work_hours }}</p>
+    </div>
+    <div class="info-item">
+        <span class="info-icon">📍</span>
+        <h3>Адрес</h3>
+        <p>{{ settings.address }}</p>
+    </div>
+</div>
+
+<!-- Руководитель -->
+<div class="glass-card director-section">
+    <p class="director-title">Руководитель автошколы</p>
+    <p class="director-name">{{ settings.director_name }}</p>
+    <p class="director-office">{{ settings.director_office }}</p>
+
+    <div class="divider"></div>
+
+    <div class="quote">
+        Мы стараемся, чтобы, обучаясь в нашей Автошколе,
+        Вы приобретали только положительные эмоции и крепкие знания,
+        которые позволят Вам уверенно чувствовать себя
+        на дороге, получая удовольствие от грамотной езды!
+        <br><br>
+        Оснащенная учебно-материальная база, современный автомобильный транспорт,
+        а также квалифицированный состав преподавателей и инструкторов по вождению
+        не вызывает сомнений в качестве обучения.
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+{% block title %}Расписание теоретических занятий — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📅 Расписание теоретических занятий по ПДД</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<div class="glass-card">
+    <div class="content-text">
+        <p style="font-size: 1.1rem; line-height: 1.8;">{{ schedule_info.info_text }}</p>
+    </div>
+
+    {% if schedule_info.schedule_image %}
+    <div class="divider"></div>
+    <div style="text-align: center;">
+        <img src="{{ schedule_info.schedule_image.url }}" alt="Расписание" style="max-width: 100%; border-radius: 12px; border: 1px solid var(--glass-border);">
+    </div>
+    {% endif %}
+
+    {% if schedule_info.schedule_file %}
+    <div class="divider"></div>
+    <div style="text-align: center;">
+        <a href="{{ schedule_info.schedule_file.url }}" target="_blank" class="btn-download">
+            📥 Скачать расписание
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

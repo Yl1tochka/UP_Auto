@@ -1,0 +1,49 @@
+{% extends 'main/base.html' %}
+{% block title %}Оформление согласия — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📄 Оформление согласия (17-летним)</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<div class="glass-card">
+    <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 25px;">
+        Для тех, кому на момент сдачи экзамена в ГИБДД не исполнилось 18 лет.
+        <br>Родителям (родителю) необходимо:
+    </p>
+    
+    <div class="consent-options">
+        <div class="consent-option">
+            <p class="option-label">Вариант 1</p>
+            <p>Заполнив бланк заявления на согласие поставить печать в <strong>РЭО ГИБДД г.Альметьевск</strong>, ул.Советская 224 (1 этаж обратиться к офицерам)</p>
+        </div>
+        
+        <div class="consent-option">
+            <p class="option-label">Вариант 2 — для иногородних</p>
+            <p>В случае отсутствия возможности прибыть в РЭО ГИБДД г.Альметьевск — оформить согласие в <strong>нотариальной конторе</strong></p>
+        </div>
+        
+        <div class="consent-option">
+            <p class="option-label">Вариант 3 — для жителей районов (село)</p>
+            <p>Заполнив бланк заявления на согласие поставить печать <strong>главы поселкового совета</strong> (подпись, ФИО, должность обязательны)</p>
+        </div>
+    </div>
+    
+    {% if info.consent_file %}
+    <div class="divider"></div>
+    <div style="text-align: center;">
+        <a href="{{ info.consent_file.url }}" target="_blank" class="btn-primary">
+            📥 Скачать образец бланка заявления на согласие
+        </a>
+    </div>
+    {% endif %}
+    
+    {% if info.content %}
+    <div class="divider"></div>
+    <div class="content-text">
+        {{ info.content|safe }}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

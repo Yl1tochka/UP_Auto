@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Автошкола «Авто-политех»{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+</head>
+<body>
+    <!-- Шапка -->
+    <header class="header">
+        <div class="header-content">
+            <a href="{% url 'main:index' %}" class="logo">
+                <div class="logo-icon">🚗</div>
+                <div class="logo-text">
+                    <h1>АВТО-ПОЛИТЕХ</h1>
+                    <span>Автошкола</span>
+                </div>
+            </a>
+            <button class="menu-toggle" aria-label="Меню">
+                <span>☰</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Навигация -->
+    <nav class="nav">
+        <div class="nav-content">
+            <ul class="nav-list">
+                <li><a href="{% url 'main:index' %}" {% if request.resolver_match.url_name == 'index' %}class="active"{% endif %}>🏠 Главная</a></li>
+                <li><a href="{% url 'main:enrollment' %}" {% if request.resolver_match.url_name == 'enrollment' %}class="active"{% endif %}>📝 Запись</a></li>
+                <li><a href="{% url 'main:documents' %}" {% if request.resolver_match.url_name == 'documents' %}class="active"{% endif %}>📋 Документы</a></li>
+                <li><a href="{% url 'main:fee_info' %}" {% if request.resolver_match.url_name == 'fee_info' %}class="active"{% endif %}>💳 Госпошлина</a></li>
+                <li><a href="{% url 'main:gallery' %}" {% if request.resolver_match.url_name == 'gallery' %}class="active"{% endif %}>📸 Галерея</a></li>
+                <li><a href="{% url 'main:schedule' %}" {% if request.resolver_match.url_name == 'schedule' %}class="active"{% endif %}>📅 Расписание</a></li>
+                <li><a href="{% url 'main:driving_schedules' %}" {% if request.resolver_match.url_name == 'driving_schedules' %}class="active"{% endif %}>🚘 Вождение</a></li>
+                <li><a href="{% url 'main:tax_return' %}" {% if request.resolver_match.url_name == 'tax_return' %}class="active"{% endif %}>💰 Возврат 13%</a></li>
+                <li><a href="{% url 'main:consent' %}" {% if request.resolver_match.url_name == 'consent' %}class="active"{% endif %}>📄 Согласие</a></li>
+                <li><a href="{% url 'main:regulations' %}" {% if request.resolver_match.url_name == 'regulations' %}class="active"{% endif %}>📑 Положения</a></li>
+                <li><a href="{% url 'main:normative_docs' %}" {% if request.resolver_match.url_name == 'normative_docs' %}class="active"{% endif %}>📚 Документы НПА</a></li>
+                <li><a href="https://pddlife.com/" target="_blank" class="external">🎯 Экзамен ПДД</a></li>
+                <li><a href="{% url 'main:exam_dates' %}" {% if request.resolver_match.url_name == 'exam_dates' %}class="active"{% endif %}>📋 Даты экзамена</a></li>
+                <li><a href="{% url 'main:gibdd_dates' %}" {% if request.resolver_match.url_name == 'gibdd_dates' %}class="active"{% endif %}>🏛 ГИБДД</a></li>
+                <li><a href="https://gtn-exam.ru/" target="_blank" class="external">🚜 Тракторы</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Основной контент -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <p>© 2025 Автошкола «Авто-политех» · {% if site_settings %}{{ site_settings.address }}{% else %}г.Альметьевск, ул. Мира 10{% endif %} · {% if site_settings %}{{ site_settings.phone }}{% else %}8 917-236-95-35{% endif %}</p>
+    </footer>
+
+    <!-- Модальное окно -->
+    <div class="modal-overlay" id="imageModal">
+        <button class="modal-close">✕</button>
+        <img id="modalImage" src="" alt="Увеличенное изображение">
+    </div>
+
+    <script src="{% static 'main/js/main.js' %}"></script>
+</body>
+</html>

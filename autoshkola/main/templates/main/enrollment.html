@@ -1,0 +1,96 @@
+{% extends 'main/base.html' %}
+{% block title %}Запись и стоимость — Авто-политех{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📝 Запись, стоимость</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<!-- Стоимость -->
+<div class="glass-card">
+    <h3 class="section-title" style="font-size: 1.1rem; margin-bottom: 5px;">Стоимость обучения</h3>
+    <p class="section-subtitle" style="margin-bottom: 25px;">Подготовка водителей категории «{{ pricing.category }}»</p>
+
+    <div class="price-cards">
+        <div class="glass-card glass-card-sm price-card">
+            <p class="price-label">Студенты техникума</p>
+            <p class="price-value">{{ pricing.student_price|floatformat:0 }}</p>
+            <p class="price-unit">рублей</p>
+            <p class="initial-payment">Первоначальный взнос: <strong>{{ pricing.student_initial_payment|floatformat:0 }} ₽</strong></p>
+        </div>
+        <div class="glass-card glass-card-sm price-card">
+            <p class="price-label">Сторонние слушатели</p>
+            <p class="price-value">{{ pricing.external_price|floatformat:0 }}</p>
+            <p class="price-unit">рублей</p>
+            <p class="initial-payment">Первоначальный взнос: <strong>{{ pricing.external_initial_payment|floatformat:0 }} ₽</strong></p>
+        </div>
+    </div>
+</div>
+
+<!-- Сроки -->
+<div class="glass-card" style="text-align: center;">
+    <h3 class="section-title" style="margin-bottom: 15px;">Сроки обучения</h3>
+    <div class="duration-badge">
+        🕐 Срок обучения — {{ pricing.training_duration }}
+    </div>
+</div>
+
+<!-- Набор -->
+<div class="glass-card">
+    <h3 class="section-title" style="font-size: 1.1rem; margin-bottom: 30px;">Запись на обучение</h3>
+
+    {% for period in periods %}
+    <div class="enrollment-period">
+        <div class="period-header">
+            <h3>{{ period.get_season_display }} период {{ period.year }}</h3>
+            <span class="status-badge {% if period.status == 'recording' %}status-recording{% elif period.status == 'completed' %}status-completed{% else %}status-training{% endif %}">
+                {% if period.status == 'recording' %}⬤ Идёт запись
+                {% elif period.status == 'completed' %}⬤ Набор завершен
+                {% else %}⬤ Идёт обучение{% endif %}
+            </span>
+        </div>
+
+        {% if period.additional_info %}
+        <p class="period-info">{{ period.additional_info }}</p>
+        {% endif %}
+
+        {% if period.recording_start and period.recording_end and period.status == 'recording' %}
+        <p class="period-info">
+            Начало записи с {{ period.recording_start|date:"d.m.Y" }} по {{ period.recording_end|date:"d.m.Y" }}.
+            {% if period.training_start %}Начало обучения с {{ period.training_start|date:"d.m.Y" }}.{% endif %}
+            {% if period.med_commission_start and period.med_commission_end %}
+            <br>Медкомиссию необходимо пройти с {{ period.med_commission_start|date:"d.m.Y" }} по {{ period.med_commission_end|date:"d.m.Y" }}.
+            {% endif %}
+        </p>
+        {% elif period.status == 'completed' %}
+        <p class="period-info">
+            Набор на {{ period.get_season_display|lower }} период {{ period.year }} завершен.
+            {% if period.training_start %}Начало обучения с {{ period.training_start|date:"d.m.Y" }}.{% endif %}
+        </p>
+        {% elif period.status == 'training' %}
+        <p class="period-info">
+            Набор на {{ period.get_season_display|lower }} период {{ period.year }} завершен. Идёт обучение.
+        </p>
+        {% endif %}
+
+        <div class="groups-grid">
+            {% for group in period.groups.all %}
+            <div class="group-card">
+                <p class="group-name">{{ group.group_number }}-я группа ({{ group.max_students }} чел.)</p>
+                <p class="group-places {% if group.free_places == 0 %}full{% else %}available{% endif %}">
+                    <span class="pulse-dot {% if group.free_places == 0 %}red{% else %}green{% endif %}"></span>
+                    {{ group.free_places }}
+                </p>
+                <p class="group-max">свободных мест</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        {% if not forloop.last %}
+        <div class="divider"></div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

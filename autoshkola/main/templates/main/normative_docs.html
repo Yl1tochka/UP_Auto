@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+{% block title %}Нормативные документы — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📚 Нормативные документы</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<div class="glass-card">
+    <div class="docs-list">
+        {% for doc in documents %}
+        {% if doc.file %}
+        <a href="{{ doc.file.url }}" target="_blank" class="doc-item">
+            <span class="doc-icon">📄</span>
+            <span class="doc-title">
+                {{ doc.title }}
+                {% if doc.note %}<br><span class="doc-note">{{ doc.note }}</span>{% endif %}
+            </span>
+            <span style="color: var(--accent-blue); font-size: 0.8rem;">📥</span>
+        </a>
+        {% elif doc.external_link %}
+        <a href="{{ doc.external_link }}" target="_blank" class="doc-item">
+            <span class="doc-icon">🔗</span>
+            <span class="doc-title">
+                {{ doc.title }}
+                {% if doc.note %}<br><span class="doc-note">{{ doc.note }}</span>{% endif %}
+            </span>
+            <span style="color: var(--accent-blue); font-size: 0.8rem;">↗</span>
+        </a>
+        {% else %}
+        <div class="doc-item" style="opacity: 0.5; cursor: default;">
+            <span class="doc-icon">📄</span>
+            <span class="doc-title">
+                {{ doc.title }}
+                {% if doc.note %}<br><span class="doc-note">{{ doc.note }}</span>{% endif %}
+            </span>
+            <span style="color: var(--text-muted); font-size: 0.8rem;">Нет файла</span>
+        </div>
+        {% endif %}
+        {% empty %}
+        <p style="color: var(--text-muted); text-align: center; padding: 30px;">
+            Нормативные документы ещё не загружены
+        </p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

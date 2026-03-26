@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+{% block title %}Возврат 13% — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>💰 Информация о возврате 13% от суммы обучения</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<div class="glass-card">
+    <div class="content-text">
+        {% if info.content %}
+            {{ info.content|safe }}
+        {% else %}
+            <p style="font-size: 1.05rem; line-height: 1.9;">
+                Для возврата 13% от суммы за обучение, необходимо написать заявление о предоставлении справки для налоговой инспекции об оплате образовательных услуг.
+            </p>
+            
+            <div class="note" style="margin-top: 20px;">
+                <strong>📌 Обращаться:</strong> 208 кабинет техникума<br>
+                <strong>При себе иметь:</strong> договор на оказание платных образовательных услуг
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'main/base.html' %}
+{% block title %}Фотогалерея — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📸 Фотогалерея</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+{% for category in categories %}
+<div class="glass-card gallery-section">
+    <h3>{{ category.name }}</h3>
+    <div class="gallery-grid">
+        {% for image in category.images.all %}
+        <div class="gallery-item">
+            <img src="{{ image.image.url }}" alt="{{ image.caption }}" loading="lazy">
+            {% if image.caption %}
+            <div class="caption">{{ image.caption }}</div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% empty %}
+<div class="glass-card" style="text-align: center; padding: 60px;">
+    <span style="font-size: 3rem; display: block; margin-bottom: 15px;">📷</span>
+    <p style="color: var(--text-muted);">Фотографии скоро будут добавлены</p>
+</div>
+{% endfor %}
+{% endblock %}

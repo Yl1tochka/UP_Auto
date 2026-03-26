@@ -1,0 +1,29 @@
+{% extends 'main/base.html' %}
+{% block title %}Положения — Автошкола «Авто-политех»{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>📑 Положения</h2>
+    <a href="{% url 'main:index' %}" class="back-link">← На главную</a>
+</div>
+
+<div class="glass-card">
+    <p style="color: var(--text-muted); margin-bottom: 25px; font-size: 0.9rem;">
+        Допуск и сдача выпускного экзамена, сдача и пересдача экзамена в РЭО ГИБДД, получение водительского удостоверения
+    </p>
+    
+    <div class="docs-list">
+        {% for reg in regulations %}
+        <a href="{{ reg.file.url }}" target="_blank" class="doc-item">
+            <span class="doc-icon">📄</span>
+            <span class="doc-title">{{ reg.title }}</span>
+            <span style="color: var(--accent-blue); font-size: 0.8rem;">📥 Скачать</span>
+        </a>
+        {% empty %}
+        <p style="color: var(--text-muted); text-align: center; padding: 30px;">
+            Положения ещё не загружены
+        </p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
