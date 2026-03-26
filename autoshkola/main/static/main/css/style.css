@@ -1066,8 +1066,8 @@ body::before {
 
 .gallery-section h3 {
     font-family: 'Orbitron', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
     color: var(--neon-70);
     margin-bottom: 18px;
     padding-bottom: 12px;
@@ -1078,7 +1078,7 @@ body::before {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 12px;
 }
 
@@ -1789,3 +1789,5 @@ body::before {
     .groups-grid { grid-template-columns: 1fr; }
     .logo-icon { width: 40px; height: 40px; font-size: 18px; }
 }
+
+
